@@ -8,7 +8,7 @@
         </ul>
     @endif
 
-    @if($posts >= 1)
+    @if(count($posts) >= 1)
         @foreach($posts as $p)
             <div class="max-w-sm w-full lg:max-w-full lg:flex">
                 <div class="border border-gray-400 bg-white rounded p-4 leading-normal shadow">
