@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\Post;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -13,7 +16,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('backend.post.index');
+        $posts = Post::orderBy('created_at', 'desc')->paginate(25);
+        return view('backend.post.index', compact('posts'));
     }
 
     /**
@@ -34,7 +38,17 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+     
+        Post::create([
+            'user_id' => Auth::user()->id,
+            'title' => $request->title,
+            'slug' => str_slug($request->title),
+            'body' => $request->body,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+
+        return redirect()->route('posts.index');
     }
 
     /**

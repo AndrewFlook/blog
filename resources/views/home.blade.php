@@ -4,7 +4,7 @@
 
     @if(Auth::check())
         <ul>
-            <a href="#"><li>Backend</li></a>
+            <a href="{{ route('posts.index') }}"><li>Backend</li></a>
         </ul>
     @endif
 

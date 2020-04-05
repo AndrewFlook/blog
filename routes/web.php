@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::resource('/backend/posts', 'PostController');
+
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
